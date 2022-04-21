@@ -45,9 +45,10 @@ namespace WindyBellows
             // 
             // btnCreateNPC
             // 
-            this.btnCreateNPC.Location = new System.Drawing.Point(26, 31);
+            this.btnCreateNPC.Location = new System.Drawing.Point(26, 39);
+            this.btnCreateNPC.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCreateNPC.Name = "btnCreateNPC";
-            this.btnCreateNPC.Size = new System.Drawing.Size(70, 59);
+            this.btnCreateNPC.Size = new System.Drawing.Size(83, 74);
             this.btnCreateNPC.TabIndex = 0;
             this.btnCreateNPC.Text = "NPCs Creator";
             this.btnCreateNPC.UseVisualStyleBackColor = true;
@@ -60,7 +61,7 @@ namespace WindyBellows
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(676, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(390, 28);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -81,9 +82,10 @@ namespace WindyBellows
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(425, 130);
+            this.button1.Location = new System.Drawing.Point(26, 453);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(198, 132);
+            this.button1.Size = new System.Drawing.Size(91, 74);
             this.button1.TabIndex = 2;
             this.button1.Text = "Start Conversion";
             this.button1.UseVisualStyleBackColor = true;
@@ -91,9 +93,10 @@ namespace WindyBellows
             // 
             // btnPlayerView
             // 
-            this.btnPlayerView.Location = new System.Drawing.Point(125, 31);
+            this.btnPlayerView.Location = new System.Drawing.Point(26, 289);
+            this.btnPlayerView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnPlayerView.Name = "btnPlayerView";
-            this.btnPlayerView.Size = new System.Drawing.Size(70, 59);
+            this.btnPlayerView.Size = new System.Drawing.Size(83, 74);
             this.btnPlayerView.TabIndex = 3;
             this.btnPlayerView.Text = "Party Viewer";
             this.btnPlayerView.UseVisualStyleBackColor = true;
@@ -101,9 +104,10 @@ namespace WindyBellows
             // 
             // btnTableEditor
             // 
-            this.btnTableEditor.Location = new System.Drawing.Point(26, 111);
+            this.btnTableEditor.Location = new System.Drawing.Point(26, 121);
+            this.btnTableEditor.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnTableEditor.Name = "btnTableEditor";
-            this.btnTableEditor.Size = new System.Drawing.Size(70, 59);
+            this.btnTableEditor.Size = new System.Drawing.Size(83, 74);
             this.btnTableEditor.TabIndex = 4;
             this.btnTableEditor.Text = "Table Editor";
             this.btnTableEditor.UseVisualStyleBackColor = true;
@@ -111,44 +115,48 @@ namespace WindyBellows
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(240, 40);
+            this.textBox1.Location = new System.Drawing.Point(12, 535);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 22);
+            this.textBox1.Size = new System.Drawing.Size(128, 27);
             this.textBox1.TabIndex = 5;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(141, 129);
+            this.button2.Location = new System.Drawing.Point(26, 371);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(91, 74);
             this.button2.TabIndex = 6;
-            this.button2.Text = "button2";
+            this.button2.Text = "Save Current Data";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(231, 97);
+            this.comboBox1.Location = new System.Drawing.Point(12, 570);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 24);
+            this.comboBox1.Size = new System.Drawing.Size(128, 28);
             this.comboBox1.TabIndex = 7;
             // 
             // btnMonster
             // 
-            this.btnMonster.Location = new System.Drawing.Point(26, 189);
+            this.btnMonster.Location = new System.Drawing.Point(26, 207);
+            this.btnMonster.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnMonster.Name = "btnMonster";
-            this.btnMonster.Size = new System.Drawing.Size(75, 60);
+            this.btnMonster.Size = new System.Drawing.Size(83, 74);
             this.btnMonster.TabIndex = 8;
             this.btnMonster.Text = "Load Monster";
             this.btnMonster.UseVisualStyleBackColor = true;
             this.btnMonster.Click += new System.EventHandler(this.BtnMonster_Click);
             // 
-            // frmMain
+            // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(676, 337);
+            this.ClientSize = new System.Drawing.Size(390, 639);
             this.Controls.Add(this.btnMonster);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button2);
@@ -160,7 +168,8 @@ namespace WindyBellows
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "frmMain";
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Name = "Main";
             this.Text = "Compendium";
             this.Load += new System.EventHandler(this.FrmPlayerView_Load);
             this.menuStrip1.ResumeLayout(false);
