@@ -19,30 +19,39 @@ namespace WindyBellows
         }
         private void FrmTableEditor_Load(object sender, EventArgs e)
         {
+            try
+            {
+                textBox1.Text = Main._comp.Tables[0].Name;
+                dataGridView1.DataSource = Main._comp.Tables[0].TableItems;
+                LoadList(0);
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
             //_table = SerializableObjectBase.FromFile<TableBase>(@"C:\Program Files (x86)\Compendium\Table.xml");
-            textBox1.Text = FrmMain._comp.Tables[0].Name;
-            dataGridView1.DataSource = FrmMain._comp.Tables[0].TableItems;
-            LoadList(0);
+            
         }
 
         private void LoadList(int index)
         {
             listBox1.Items.Clear();
-            for (int i = 0; i < FrmMain._comp.Tables.Count; i++)
+            for (int i = 0; i < Main._comp.Tables.Count; i++)
             {
-                listBox1.Items.Add(FrmMain._comp.Tables[i].Name);
+                listBox1.Items.Add(Main._comp.Tables[i].Name);
             }
             listBox1.SelectedIndex = index;
         }
         private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             int inttotal = 0;
-            for (int i = 0; i < FrmMain._comp.Tables[listBox1.SelectedIndex].TableItems.Count; i++)
+            for (int i = 0; i < Main._comp.Tables[listBox1.SelectedIndex].TableItems.Count; i++)
             {
-                inttotal += FrmMain._comp.Tables[listBox1.SelectedIndex].TableItems[i].Value;
+                inttotal += Main._comp.Tables[listBox1.SelectedIndex].TableItems[i].Value;
             }
-            dataGridView1.DataSource = FrmMain._comp.Tables[listBox1.SelectedIndex].TableItems;
-            textBox1.Text = FrmMain._comp.Tables[listBox1.SelectedIndex].Name;
+            dataGridView1.DataSource = Main._comp.Tables[listBox1.SelectedIndex].TableItems;
+            textBox1.Text = Main._comp.Tables[listBox1.SelectedIndex].Name;
             label2.Text = "Total number of chances in table is x out of " + inttotal;
         }
         private void CheckBox1_CheckedChanged(object sender, EventArgs e)
@@ -102,15 +111,15 @@ namespace WindyBellows
                 checkBox1.Checked = false;
 
             }
-            for (int i = 0; i < FrmMain._comp.Tables.Count; i++)
+            for (int i = 0; i < Main._comp.Tables.Count; i++)
             {
-                if (FrmMain._comp.Tables[i].Name == textBox1.Text)
+                if (Main._comp.Tables[i].Name == textBox1.Text)
                 {
                     DialogResult dialogResult = MessageBox.Show("Table with this name already exists do you want to Update that table?", "Warning", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        FrmMain._comp.Tables.RemoveAt(i);
-                        FrmMain._comp.Tables.Insert(i, _newTable);
+                        Main._comp.Tables.RemoveAt(i);
+                        Main._comp.Tables.Insert(i, _newTable);
                         return;
                     }
                     else if (dialogResult == DialogResult.No)
@@ -119,13 +128,13 @@ namespace WindyBellows
                     }
                 }
             }
-            FrmMain._comp.Tables.Add(_newTable);
+            Main._comp.Tables.Add(_newTable);
             listBox1.Items.Clear();
-            for (int i = 0; i < FrmMain._comp.Tables.Count; i++)
+            for (int i = 0; i < Main._comp.Tables.Count; i++)
             {
-                listBox1.Items.Add(FrmMain._comp.Tables[i].Name);
+                listBox1.Items.Add(Main._comp.Tables[i].Name);
             }
-            dataGridView1.DataSource = FrmMain._comp.Tables[^1].TableItems;
+            dataGridView1.DataSource = Main._comp.Tables[^1].TableItems;
             listBox1.SelectedIndex = listBox1.Items.Count - 1;
         }
         private void BtnAddRow_Click(object sender, EventArgs e)
@@ -136,10 +145,10 @@ namespace WindyBellows
             }
             else
             {
-                FrmMain._comp.Tables[listBox1.SelectedIndex].TableItems.Add(new TableItem());
+                Main._comp.Tables[listBox1.SelectedIndex].TableItems.Add(new TableItem());
                 int x = listBox1.SelectedIndex;
                 dataGridView1.DataSource = null;
-                dataGridView1.DataSource = FrmMain._comp.Tables[x].TableItems;
+                dataGridView1.DataSource = Main._comp.Tables[x].TableItems;
             }
         }
         private void BtnRemoveRow_Click(object sender, EventArgs e)
@@ -151,10 +160,10 @@ namespace WindyBellows
             else
             {
 
-                FrmMain._comp.Tables[listBox1.SelectedIndex].TableItems.RemoveAt(dataGridView1.CurrentCell.RowIndex);
+                Main._comp.Tables[listBox1.SelectedIndex].TableItems.RemoveAt(dataGridView1.CurrentCell.RowIndex);
                 int x = listBox1.SelectedIndex;
                 dataGridView1.DataSource = null;
-                dataGridView1.DataSource = FrmMain._comp.Tables[x].TableItems;
+                dataGridView1.DataSource = Main._comp.Tables[x].TableItems;
 
             }
         }
@@ -165,7 +174,7 @@ namespace WindyBellows
             {
                 for (int i = 0; i < Convert.ToInt16(textBox2.Text.ToString()); i++) //Run Table for x times based on text box.
                 {
-                    richTextBox1.Text += Table.RunTable(FrmMain._comp.Tables, FrmMain._comp.Tables[listBox1.SelectedIndex]) + " ";
+                    richTextBox1.Text += Table.RunTable(Main._comp.Tables, Main._comp.Tables[listBox1.SelectedIndex]) + " ";
                 }
             }
             catch (Exception)
@@ -188,7 +197,7 @@ namespace WindyBellows
 
         private void BtnRemoveTable_Click(object sender, EventArgs e)
         {
-            FrmMain._comp.Tables.RemoveAt(listBox1.SelectedIndex);
+            Main._comp.Tables.RemoveAt(listBox1.SelectedIndex);
             LoadList(listBox1.SelectedIndex);
 
         }
@@ -197,9 +206,9 @@ namespace WindyBellows
         {
             if (listBox1.SelectedIndex != 0)
             {
-                Table tempTable = FrmMain._comp.Tables[listBox1.SelectedIndex] as Table;
-                FrmMain._comp.Tables.RemoveAt(listBox1.SelectedIndex);
-                FrmMain._comp.Tables.Insert(listBox1.SelectedIndex - 1, tempTable);
+                Table tempTable = Main._comp.Tables[listBox1.SelectedIndex] as Table;
+                Main._comp.Tables.RemoveAt(listBox1.SelectedIndex);
+                Main._comp.Tables.Insert(listBox1.SelectedIndex - 1, tempTable);
                 LoadList(listBox1.SelectedIndex - 1);
             }
         }
@@ -208,9 +217,9 @@ namespace WindyBellows
         {
             if (listBox1.SelectedIndex != listBox1.Items.Count - 1)
             {
-                Table tempTable = FrmMain._comp.Tables[listBox1.SelectedIndex] as Table;
-                FrmMain._comp.Tables.RemoveAt(listBox1.SelectedIndex);
-                FrmMain._comp.Tables.Insert(listBox1.SelectedIndex + 1, tempTable);
+                Table tempTable = Main._comp.Tables[listBox1.SelectedIndex] as Table;
+                Main._comp.Tables.RemoveAt(listBox1.SelectedIndex);
+                Main._comp.Tables.Insert(listBox1.SelectedIndex + 1, tempTable);
                 LoadList(listBox1.SelectedIndex + 1);
             }
         }

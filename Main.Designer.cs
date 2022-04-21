@@ -1,7 +1,7 @@
 ﻿
 namespace WindyBellows
 {
-    partial class FrmMain
+    partial class Main
     {
         /// <summary>
         /// Required designer variable.

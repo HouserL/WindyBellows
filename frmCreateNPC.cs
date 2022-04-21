@@ -46,16 +46,16 @@ namespace WindyBellows
                 _NPC.HP = Convert.ToInt32(txtHP.Text.ToString());
                 _NPC.Stats = _stats;
 
-                for (int i = 0; i < FrmMain._comp.NPCs.Count; i++)
+                for (int i = 0; i < Main._comp.NPCs.Count; i++)
                 {
                     //see if NPCs already exists and remove or update it.
-                    if (_NPC.Name.Equals(FrmMain._comp.NPCs[i].Name))
+                    if (_NPC.Name.Equals(Main._comp.NPCs[i].Name))
                     {
                         DialogResult dialogResult = MessageBox.Show("NPCs with this Name already exist would you like to " +
                             "overwrite current NPCs?", "NPCs Creator", MessageBoxButtons.YesNo);
                         if (dialogResult == DialogResult.Yes)
                         {
-                            FrmMain._comp.NPCs.Remove(FrmMain._comp.NPCs[i]);
+                            Main._comp.NPCs.Remove(Main._comp.NPCs[i]);
 
                         }
                         else if (dialogResult == DialogResult.No)
@@ -65,9 +65,9 @@ namespace WindyBellows
                     }
                 }
 
-                FrmMain._comp.NPCs.Add(_NPC);
-                FrmMain._comp.NPCs.Sort((x, y) => string.Compare(x.Name, y.Name));
-                FrmMain.SaveNPCBase();
+                Main._comp.NPCs.Add(_NPC);
+                Main._comp.NPCs.Sort((x, y) => string.Compare(x.Name, y.Name));
+                Main.SaveNPCBase();
             }
             catch (Exception ex)
             {
@@ -88,7 +88,7 @@ namespace WindyBellows
 
         private void BtnRandomRace_Click(object sender, EventArgs e)
         {
-            txtRace.Text = Table.RunTable(FrmMain._comp.Tables, FrmMain._comp.Tables[Properties.Settings.Default.tblRace]);
+            txtRace.Text = Table.RunTable(Main._comp.Tables, Main._comp.Tables[Properties.Settings.Default.tblRace]);
         }
 
         static int RandomStatRoll()
@@ -134,16 +134,16 @@ namespace WindyBellows
                 _Player.HP = Convert.ToByte(txtHP.Text.ToString());
                 _Player.Stats = _stats;
 
-                for (int i = 0; i < FrmMain._comp.Players.Count; i++)
+                for (int i = 0; i < Main._comp.Players.Count; i++)
                 {
                     //see if NPCs already exists and remove or update it.
-                    if (_Player.Name.Equals(FrmMain._comp.Players[i].Name))
+                    if (_Player.Name.Equals(Main._comp.Players[i].Name))
                     {
                         DialogResult dialogResult = MessageBox.Show("Player with this Name already exist would you like to " +
                             "overwrite current Player?", "NPCs Creator", MessageBoxButtons.YesNo);
                         if (dialogResult == DialogResult.Yes)
                         {
-                            FrmMain._comp.Players.Remove(FrmMain._comp.Players[i]);
+                            Main._comp.Players.Remove(Main._comp.Players[i]);
 
                         }
                         else if (dialogResult == DialogResult.No)
@@ -153,9 +153,9 @@ namespace WindyBellows
                     }
                 }
 
-                FrmMain._comp.Players.Add(_Player);
-                FrmMain._comp.Players.Sort((x, y) => string.Compare(x.Name, y.Name));
-                FrmMain.SavePlayerBase();
+                Main._comp.Players.Add(_Player);
+                Main._comp.Players.Sort((x, y) => string.Compare(x.Name, y.Name));
+                Main.SavePlayerBase();
             }
             catch (Exception ex)
             {
@@ -183,9 +183,9 @@ namespace WindyBellows
 
             ComboBox comboBox = new();
             ComboBox combobox = comboBox;
-            for (int i = 0; i < FrmMain._comp.Tables.Count ; i++)
+            for (int i = 0; i < Main._comp.Tables.Count ; i++)
             {
-                combobox.Items.Add(FrmMain._comp.Tables[i].Name);
+                combobox.Items.Add(Main._comp.Tables[i].Name);
             }
             combobox.Size = new System.Drawing.Size(size.Width - 10, 23);
             combobox.Location = new System.Drawing.Point(5, 5);

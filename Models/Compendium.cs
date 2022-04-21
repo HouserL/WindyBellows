@@ -329,11 +329,6 @@ namespace WindyBellows
         public List<string> Players { get; set; }
         [System.Xml.Serialization.XmlElementAttribute("NPC")]
         public List<string> NPCs { get; set; }
-
-    }
-    public partial class Job
-    {
-        public string Name { get; set; }
     }
 
 

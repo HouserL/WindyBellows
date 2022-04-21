@@ -12,7 +12,7 @@ using System.Configuration;
 
 namespace WindyBellows
 {
-    public partial class FrmMain : Form
+    public partial class Main : Form
     {
 #pragma warning disable CA2211 // Non-constant fields should not be visible
         public static Compendium _comp;
@@ -23,7 +23,7 @@ namespace WindyBellows
         //public static Compendium _comp;
         //public static MonsterBase _mons;
         //public static NPCBase _NPC;
-        public FrmMain()
+        public Main()
         {
             InitializeComponent();
         }
@@ -31,7 +31,6 @@ namespace WindyBellows
         {
             if (!File.Exists("./Compendium.xml"))
             {
-                File.Create("./Compendium.xml");
                 _comp = new();
                 _comp.Monsters = new List<Monster>();
                 _comp.Players = new List<Player>();
@@ -60,6 +59,12 @@ namespace WindyBellows
         }
         public static void SavePlayerBase()
         {
+            if (!File.Exists("./Compendium.xml"))
+            {
+                //File.Create("./Compendium.xml");
+                _comp.WriteToStream(File.Create("./Compendium.xml"),SerializableObjectBase.SerializableObjectType.Xml);
+                return;
+            }
             _comp.WriteToFile("./Compendium.xml");
         }
         public static void SaveNPCBase()
