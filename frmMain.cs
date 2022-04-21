@@ -12,25 +12,27 @@ using System.Configuration;
 
 namespace WindyBellows
 {
-    public partial class frmMain : Form
+    public partial class FrmMain : Form
     {
+#pragma warning disable CA2211 // Non-constant fields should not be visible
         public static Compendium _comp;
+#pragma warning restore CA2211 // Non-constant fields should not be visible
         public OldCompendium _oldComp;
         //public static TableBase _table;
         //public static PlayerBase _play;
         //public static Compendium _comp;
         //public static MonsterBase _mons;
         //public static NPCBase _NPC;
-        public frmMain()
+        public FrmMain()
         {
             InitializeComponent();
         }
-        private void frmPlayerView_Load(object sender, EventArgs e)
+        private void FrmPlayerView_Load(object sender, EventArgs e)
         {
             if (!File.Exists("./Compendium.xml"))
             {
                 File.Create("./Compendium.xml");
-                _comp = new Compendium();
+                _comp = new();
                 _comp.Monsters = new List<Monster>();
                 _comp.Players = new List<Player>();
                 _comp.Tables = new List<Table>();
@@ -44,17 +46,16 @@ namespace WindyBellows
             {
                 comboBox1.Items.Add(_comp.Monsters[i].Name);
             }
-            
+            //_comp.Players[0].Skills
         }
-        private void btnCreateNPC_Click(object sender, EventArgs e)
+        private void BtnCreateNPC_Click(object sender, EventArgs e)
         {
-            frmCreateNPC form = new frmCreateNPC();
+            CreateNPC form = new();
             form.Show();
-            form._STR = 6;
         }
-        private void savePlayerBaseToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SavePlayerBaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
+
             SavePlayerBase();
         }
         public static void SavePlayerBase()
@@ -65,6 +66,45 @@ namespace WindyBellows
         {
             //_NPC.WriteToFile(@"C:\Program Files (x86)\Compendium\NPCs.xml");
         }
+
+        protected (int HitDie, byte HitDieValue) GetHP(int i, int j)
+        {
+            //Get 2 int values inside of string so we can et and set HP either on averages or randomnly
+            // instead of using a string to just show the values of everything from average to die values.
+            string input = _oldComp.MonsterTypes[i].Items[j].ToString();
+            int k = input.IndexOf('(');
+            int l = input.IndexOf('d');
+            var m = input switch
+            {
+                string a when a.Contains("+") => input.IndexOf('+'),
+                string b when b.Contains("-") => input.IndexOf('-'),
+                string c when c.Contains(")") => input.IndexOf(')'),
+                _ => 0,
+            };
+
+            int HitDie = Convert.ToInt32(input.Substring(k + 1, l - k - 1));
+            byte HitDieValue = Convert.ToByte(input.Substring(l + 1, m - l - 1));
+
+            return (HitDie, HitDieValue);
+        }
+        protected (BaseStats _stats, int i, int j) ConvertMonsterGetStats(int i, int j)
+        {
+            BaseStats _stats = new();
+            _stats.STR = Convert.ToByte(_oldComp.MonsterTypes[i].Items[j]); j++;
+            _stats.DEX = Convert.ToByte(_oldComp.MonsterTypes[i].Items[j]); j++;
+            _stats.CON = Convert.ToByte(_oldComp.MonsterTypes[i].Items[j]); j++;
+            _stats.INT = Convert.ToByte(_oldComp.MonsterTypes[i].Items[j]); j++;
+            _stats.WIS = Convert.ToByte(_oldComp.MonsterTypes[i].Items[j]); j++;
+            _stats.CHR = Convert.ToByte(_oldComp.MonsterTypes[i].Items[j]);
+            return (_stats, j, i);
+        }
+        protected static BaseItem GetBaseItem(int i, int j)
+        {
+            _ = i + j;
+            BaseItem _baseItem = new();
+            return _baseItem;
+        }
+
         private void ConvertMonsters()
         {
             //Hate this block 
@@ -75,16 +115,47 @@ namespace WindyBellows
                 bool _monsterExists = false;
                 for (int i = 0; i < _oldComp.MonsterTypes.Count; i++)
                 {
-                    //switch (_oldComp.MonsterTypes[0].ItemsElementName[i].ToString())
-                    //{
-                    //    case "Name": break;
-                    //    default: break;
-                    //} // Convert lower code to this code
-                    //if(i == 3007)
-                    //{
-                    //use to find errors inside of code
-                    //}
-                    Monster _monster = new Monster();
+                    Monster _monster = new();
+                    for (int j = 0; j < _oldComp.MonsterTypes[i].ItemsElementName.Length; j++)
+                    {
+                        switch (_oldComp.MonsterTypes[i].ItemsElementName[j].ToString())
+                        {
+                            case "name": _monster.Name = _oldComp.MonsterTypes[i].Items[j].ToString(); break;
+                            case "size": _monster.Size = _oldComp.MonsterTypes[i].Items[j].ToString(); break;
+                            case "type": _monster.Type = _oldComp.MonsterTypes[i].Items[j].ToString(); break;
+                            case "ac": _monster.AC = _oldComp.MonsterTypes[i].Items[j].ToString(); break;
+                            case "Alignment": goto case "alignment";
+                            case "alignment": _monster.Alignment = _oldComp.MonsterTypes[i].Items[j].ToString(); break;
+                            case "speed": _monster.Speed = _oldComp.MonsterTypes[i].Items[j].ToString(); break;
+                            case "str": (_monster.Stats, i, j) = ConvertMonsterGetStats(i, j); break;
+                            case "cr": _monster.CR = _oldComp.MonsterTypes[i].Items[j].ToString(); break;
+                            case "save": _monster.OldSave = _oldComp.MonsterTypes[i].Items[j].ToString(); break;
+                            //case "skill": _monster.Skill = _oldComp.MonsterTypes[i].Items[j].ToString(); break;
+                            case "hp": (_monster.HitDie, _monster.HitDieValue) = GetHP(i, j); break;
+                            case "trait": _monster.Trait.Add(GetBaseItem(i, j)); break;
+                            case "action": _monster.Action.Add(GetBaseItem(i, j)); break;
+                            case "legendary": _monster.Legendary.Add(GetBaseItem(i, j)); break;
+                            case "reaction": _monster.Reaction.Add(GetBaseItem(i, j)); break;
+                            case "description": _monster.Description = _oldComp.MonsterTypes[i].Items[j].ToString(); break;
+                            case "condionImmune": _monster.Condition = _oldComp.MonsterTypes[i].Items[j].ToString(); break;
+                            case "languages": _monster.Languages = _oldComp.MonsterTypes[i].Items[j].ToString(); break;
+                            case "senses": _monster.Senses = _oldComp.MonsterTypes[i].Items[j].ToString(); break;
+                            //case "passive": _monster.PassivePerception = _oldComp.MonsterTypes[i].Items[j].ToString(); break;
+                            case "enviroment": _monster.Enviroment = _oldComp.MonsterTypes[i].Items[j].ToString(); break;
+                            case "immune": _monster.Immuneold = _oldComp.MonsterTypes[i].Items[j].ToString(); break;
+                            case "resist": _monster.Resist = _oldComp.MonsterTypes[i].Items[j].ToString(); break;
+                            case "slot": _monster.Slots = _oldComp.MonsterTypes[i].Items[j].ToString(); break;
+
+                            default:
+                                break;
+                        }
+                        //} // Convert lower code to this code
+                        //if(i == 3007)
+                        //{
+                        //use to find errors inside of code
+                        //}
+                    }
+
                     for (int j = 0; j < _oldComp.MonsterTypes[i].Items.Length; j++)
                     {
                         if (_oldComp.MonsterTypes[i].ItemsElementName[j].ToString() == "name")
@@ -113,7 +184,7 @@ namespace WindyBellows
                         }
                         else if (_oldComp.MonsterTypes[i].ItemsElementName[j].ToString() == "str")
                         {
-                            BaseStats _stats = new BaseStats();
+                            BaseStats _stats = new();
                             _stats.STR = Convert.ToByte(_oldComp.MonsterTypes[i].Items[j]);
                             j++;
                             _stats.DEX = Convert.ToByte(_oldComp.MonsterTypes[i].Items[j]);
@@ -134,7 +205,7 @@ namespace WindyBellows
                         else if (_oldComp.MonsterTypes[i].ItemsElementName[j].ToString() == "trait")
                         {
                             CompendiumBaseItem _oldBase = _oldComp.MonsterTypes[i].Items[j] as CompendiumBaseItem;
-                            BaseItem _baseitem = new BaseItem();
+                            BaseItem _baseitem = new();
                             _baseitem.Name = _oldBase.Name.ToString();
                             _baseitem.Description = _oldBase.Text.ToString();
                             if (_monster.Trait == null)
@@ -146,7 +217,7 @@ namespace WindyBellows
                         else if (_oldComp.MonsterTypes[i].ItemsElementName[j].ToString() == "action")
                         {
                             CompendiumBaseItem _oldBase = _oldComp.MonsterTypes[i].Items[j] as CompendiumBaseItem;
-                            BaseItem _baseitem = new BaseItem();
+                            BaseItem _baseitem = new();
                             if (_oldBase.Name == null)
                             {
                                 // fixes issues with old file splitting items
@@ -154,7 +225,7 @@ namespace WindyBellows
                                 int k = input.IndexOf('.');
                                 string word = input.Substring(0, k);
                                 _baseitem.Name = word;
-                                word = input.Substring(k + 2);
+                                word = input[(k + 2)..];
                                 _baseitem.Description = word;
                             }
                             else
@@ -171,7 +242,7 @@ namespace WindyBellows
                         else if (_oldComp.MonsterTypes[i].ItemsElementName[j].ToString() == "reaction")
                         {
                             CompendiumBaseItem _oldBase = _oldComp.MonsterTypes[i].Items[j] as CompendiumBaseItem;
-                            BaseItem _baseitem = new BaseItem();
+                            BaseItem _baseitem = new();
                             _baseitem.Name = _oldBase.Name.ToString();
                             _baseitem.Description = _oldBase.Text.ToString();
                             if (_monster.Reaction == null)
@@ -183,7 +254,7 @@ namespace WindyBellows
                         else if (_oldComp.MonsterTypes[i].ItemsElementName[j].ToString() == "legendary")
                         {
                             CompendiumBaseItem _oldBase = _oldComp.MonsterTypes[i].Items[j] as CompendiumBaseItem;
-                            BaseItem _baseitem = new BaseItem();
+                            BaseItem _baseitem = new();
                             if (_oldBase.Name == null)
                             {
                                 _baseitem.Name = "Legendary";
@@ -246,43 +317,43 @@ namespace WindyBellows
                         }
                         else if (_oldComp.MonsterTypes[i].ItemsElementName[j].ToString() == "senses")
                         {
-                            _monster.senses = _oldComp.MonsterTypes[i].Items[j].ToString(); 
+                            _monster.Senses = _oldComp.MonsterTypes[i].Items[j].ToString();
                         }
                         else if (_oldComp.MonsterTypes[i].ItemsElementName[j].ToString() == "passive")
                         {
-                            _monster.passive = Convert.ToByte(_oldComp.MonsterTypes[i].Items[j]);
+                            // _monster.PassivePerception = Convert.ToByte(_oldComp.MonsterTypes[i].Items[j]);
                         }
                         else if (_oldComp.MonsterTypes[i].ItemsElementName[j].ToString() == "alignment")
                         {
-                            _monster.alignment = _oldComp.MonsterTypes[i].Items[j].ToString();
+                            _monster.Alignment = _oldComp.MonsterTypes[i].Items[j].ToString();
                         }
                         else if (_oldComp.MonsterTypes[i].ItemsElementName[j].ToString() == "languages")
                         {
-                            _monster.languages = _oldComp.MonsterTypes[i].Items[j].ToString();
+                            _monster.Languages = _oldComp.MonsterTypes[i].Items[j].ToString();
                         }
                         else if (_oldComp.MonsterTypes[i].ItemsElementName[j].ToString() == "description")
                         {
-                            _monster.description = _oldComp.MonsterTypes[i].Items[j].ToString();
+                            _monster.Description = _oldComp.MonsterTypes[i].Items[j].ToString();
                         }
                         else if (_oldComp.MonsterTypes[i].ItemsElementName[j].ToString() == "environment")
                         {
-                            _monster.enivroment = _oldComp.MonsterTypes[i].Items[j].ToString();
+                            _monster.Enviroment = _oldComp.MonsterTypes[i].Items[j].ToString();
                         }
                         else if (_oldComp.MonsterTypes[i].ItemsElementName[j].ToString() == "immune")
                         {
-                            _monster.immuneold = _oldComp.MonsterTypes[i].Items[j].ToString();
+                            _monster.Immuneold = _oldComp.MonsterTypes[i].Items[j].ToString();
                         }
                         else if (_oldComp.MonsterTypes[i].ItemsElementName[j].ToString() == "resist")
                         {
-                            _monster.resist = _oldComp.MonsterTypes[i].Items[j].ToString();
+                            _monster.Resist = _oldComp.MonsterTypes[i].Items[j].ToString();
                         }
                         else if (_oldComp.MonsterTypes[i].ItemsElementName[j].ToString() == "slots")
                         {
-                            _monster.slots = _oldComp.MonsterTypes[i].Items[j].ToString();
+                            _monster.Slots = _oldComp.MonsterTypes[i].Items[j].ToString();
                         }
                         else if (_oldComp.MonsterTypes[i].ItemsElementName[j].ToString() == "conditionImmune")
                         {
-                            _monster.condition = _oldComp.MonsterTypes[i].Items[j].ToString();
+                            _monster.Condition = _oldComp.MonsterTypes[i].Items[j].ToString();
                         }
                         else
                         {
@@ -300,7 +371,7 @@ namespace WindyBellows
                     //    ShowInputDialog( ref _newWord, _monster.Name.ToString());
                     //    _monster.Size = _newWord;
                     //}
-                    if(_comp.Monsters == null)
+                    if (_comp.Monsters == null)
                     {
                         _comp.Monsters = new List<Monster>();
                     }
@@ -313,7 +384,7 @@ namespace WindyBellows
                             break;
                         }
                     }
-                    if(_monsterExists == true)
+                    if (_monsterExists == true)
                     {
                         _comp.Monsters.RemoveAt(_monsterIndex);
                         _comp.Monsters.Insert(_monsterIndex, _monster);
@@ -322,7 +393,7 @@ namespace WindyBellows
                     {
                         _comp.Monsters.Add(_monster);
                     }
-                   
+
                 }
             }
             catch (Exception ex)
@@ -335,20 +406,20 @@ namespace WindyBellows
 
         private static DialogResult ShowInputDialog(ref string input, string _Title)
         {
-            System.Drawing.Size size = new System.Drawing.Size(300, 70);
-            Form inputBox = new Form();
+            System.Drawing.Size size = new(300, 70);
+            Form inputBox = new();
 
             inputBox.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             inputBox.ClientSize = size;
             inputBox.Text = _Title;
 
-            System.Windows.Forms.TextBox textBox = new TextBox();
-            textBox.Size = new System.Drawing.Size(size.Width - 10, 23);
-            textBox.Location = new System.Drawing.Point(5, 5);
+            System.Windows.Forms.TextBox textBox = new();
+            textBox.Size = new(size.Width - 10, 23);
+            textBox.Location = new Point(5, 5);
             textBox.Text = input;
             inputBox.Controls.Add(textBox);
 
-            Button okButton = new Button();
+            Button okButton = new();
             okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             okButton.Name = "okButton";
             okButton.Size = new System.Drawing.Size(75, 23);
@@ -356,7 +427,7 @@ namespace WindyBellows
             okButton.Location = new System.Drawing.Point(size.Width - 80 - 80, 39);
             inputBox.Controls.Add(okButton);
 
-            Button cancelButton = new Button();
+            Button cancelButton = new();
             cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             cancelButton.Name = "cancelButton";
             cancelButton.Size = new System.Drawing.Size(75, 23);
@@ -371,13 +442,13 @@ namespace WindyBellows
             input = textBox.Text;
             return result;
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             ConvertMonsters();
         }
-        private void btnPlayerView_Click(object sender, EventArgs e)
+        private void BtnPlayerView_Click(object sender, EventArgs e)
         {
-            frmPlayerView form = new frmPlayerView();
+            frmPlayerView form = new();
             form.Show();
             //List<Monster> _saveMonster = _mons.Monsters as List<Monster>;
             //_saveMonster = _mons.Monsters;
@@ -386,21 +457,21 @@ namespace WindyBellows
             //monsterBase.WriteToFile(@"C:\Users\Drebi\source\repos\WindyBellows\BaseXML\Monsters.xml");
             //_saveMonster[0].WriteToFile(@"C:\Users\Drebi\source\repos\WindyBellows\BaseXML\Monsters.xml");
         }
-        private void btnTableEditor_Click(object sender, EventArgs e)
+        private void BtnTableEditor_Click(object sender, EventArgs e)
         {
-            frmTableEditor form = new frmTableEditor();
+            TableEditor form = new();
             form.Show();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             textBox1.Text = _comp.Monsters[comboBox1.SelectedIndex].RandomHP().ToString();
         }
 
-        private void btnMonster_Click(object sender, EventArgs e)
+        private void BtnMonster_Click(object sender, EventArgs e)
         {
-            frmMonster form = new frmMonster();
-            form._monster = _comp.Monsters[0];
+            frmMonster form = new();
+            form.Monster = _comp.Monsters[0];
             form.Show();
         }
     }

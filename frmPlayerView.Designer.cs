@@ -75,7 +75,7 @@ namespace WindyBellows
             this.addPlayerToolStripMenuItem.Name = "addPlayerToolStripMenuItem";
             this.addPlayerToolStripMenuItem.Size = new System.Drawing.Size(195, 26);
             this.addPlayerToolStripMenuItem.Text = "Add Player";
-            this.addPlayerToolStripMenuItem.Click += new System.EventHandler(this.addPlayerToolStripMenuItem_Click);
+            this.addPlayerToolStripMenuItem.Click += new System.EventHandler(this.AddPlayerToolStripMenuItem_Click);
             // 
             // nPCToolStripMenuItem
             // 
@@ -96,7 +96,7 @@ namespace WindyBellows
             this.addNPCToolStripMenuItem.Name = "addNPCToolStripMenuItem";
             this.addNPCToolStripMenuItem.Size = new System.Drawing.Size(195, 26);
             this.addNPCToolStripMenuItem.Text = "Add NPCs";
-            this.addNPCToolStripMenuItem.Click += new System.EventHandler(this.addNPCToolStripMenuItem_Click);
+            this.addNPCToolStripMenuItem.Click += new System.EventHandler(this.AddNPCToolStripMenuItem_Click);
             // 
             // loadGuildToolStripMenuItem
             // 
@@ -117,7 +117,7 @@ namespace WindyBellows
             this.loadGuildToolStripMenuItem1.Name = "loadGuildToolStripMenuItem1";
             this.loadGuildToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.loadGuildToolStripMenuItem1.Text = "Load Guild";
-            this.loadGuildToolStripMenuItem1.Click += new System.EventHandler(this.loadGuildToolStripMenuItem1_Click);
+            this.loadGuildToolStripMenuItem1.Click += new System.EventHandler(this.LoadGuildToolStripMenuItem1_Click);
             // 
             // frmPlayerView
             // 
@@ -131,7 +131,7 @@ namespace WindyBellows
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmPlayerView";
             this.Text = "Player View";
-            this.Load += new System.EventHandler(this.frmPlayerView_Load);
+            this.Load += new System.EventHandler(this.FrmPlayerView_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

@@ -1,7 +1,7 @@
 ﻿
 namespace WindyBellows
 {
-    partial class frmTableEditor
+    partial class TableEditor
     {
         /// <summary>
         /// Required designer variable.
@@ -77,7 +77,7 @@ namespace WindyBellows
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(293, 132);
             this.listBox1.TabIndex = 1;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.ListBox1_SelectedIndexChanged);
             // 
             // checkBox1
             // 
@@ -88,7 +88,7 @@ namespace WindyBellows
             this.checkBox1.TabIndex = 3;
             this.checkBox1.Text = "edit name";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
             // 
             // textBox1
             // 
@@ -110,7 +110,7 @@ namespace WindyBellows
             this.btnNewTable.TabIndex = 5;
             this.btnNewTable.Text = "Add New Table";
             this.btnNewTable.UseVisualStyleBackColor = true;
-            this.btnNewTable.Click += new System.EventHandler(this.btnNewTable_Click);
+            this.btnNewTable.Click += new System.EventHandler(this.BtnNewTable_Click);
             // 
             // richTextBox1
             // 
@@ -122,8 +122,8 @@ namespace WindyBellows
             this.richTextBox1.Size = new System.Drawing.Size(293, 166);
             this.richTextBox1.TabIndex = 6;
             this.richTextBox1.Text = "";
-            this.richTextBox1.ContentsResized += new System.Windows.Forms.ContentsResizedEventHandler(this.richTextBox1_ContentsResized);
-            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            this.richTextBox1.ContentsResized += new System.Windows.Forms.ContentsResizedEventHandler(this.RichTextBox1_ContentsResized);
+            this.richTextBox1.TextChanged += new System.EventHandler(this.RichTextBox1_TextChanged);
             // 
             // btnSaveTable
             // 
@@ -133,7 +133,7 @@ namespace WindyBellows
             this.btnSaveTable.TabIndex = 7;
             this.btnSaveTable.Text = "Save Table";
             this.btnSaveTable.UseVisualStyleBackColor = true;
-            this.btnSaveTable.Click += new System.EventHandler(this.btnSaveTable_Click);
+            this.btnSaveTable.Click += new System.EventHandler(this.BtnSaveTable_Click);
             // 
             // btnAddRow
             // 
@@ -143,7 +143,7 @@ namespace WindyBellows
             this.btnAddRow.TabIndex = 8;
             this.btnAddRow.Text = "Add Row";
             this.btnAddRow.UseVisualStyleBackColor = true;
-            this.btnAddRow.Click += new System.EventHandler(this.btnAddRow_Click);
+            this.btnAddRow.Click += new System.EventHandler(this.BtnAddRow_Click);
             // 
             // btnRemoveRow
             // 
@@ -153,7 +153,7 @@ namespace WindyBellows
             this.btnRemoveRow.TabIndex = 9;
             this.btnRemoveRow.Text = "Remove Selected Row";
             this.btnRemoveRow.UseVisualStyleBackColor = true;
-            this.btnRemoveRow.Click += new System.EventHandler(this.btnRemoveRow_Click);
+            this.btnRemoveRow.Click += new System.EventHandler(this.BtnRemoveRow_Click);
             // 
             // button1
             // 
@@ -163,7 +163,7 @@ namespace WindyBellows
             this.button1.TabIndex = 10;
             this.button1.Text = "Test Table";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // textBox2
             // 
@@ -171,7 +171,7 @@ namespace WindyBellows
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(73, 22);
             this.textBox2.TabIndex = 11;
-            this.textBox2.Leave += new System.EventHandler(this.textBox2Leave);
+            this.textBox2.Leave += new System.EventHandler(this.TextBox2Leave);
             // 
             // btnRemoveTable
             // 
@@ -181,7 +181,7 @@ namespace WindyBellows
             this.btnRemoveTable.TabIndex = 12;
             this.btnRemoveTable.Text = "Remove Selected Table";
             this.btnRemoveTable.UseVisualStyleBackColor = true;
-            this.btnRemoveTable.Click += new System.EventHandler(this.btnRemoveTable_Click);
+            this.btnRemoveTable.Click += new System.EventHandler(this.BtnRemoveTable_Click);
             // 
             // label1
             // 
@@ -211,7 +211,7 @@ namespace WindyBellows
             this.btnTableUp.TabIndex = 15;
             this.btnTableUp.Text = "Move UP";
             this.btnTableUp.UseVisualStyleBackColor = true;
-            this.btnTableUp.Click += new System.EventHandler(this.btnTableUp_Click);
+            this.btnTableUp.Click += new System.EventHandler(this.BtnTableUp_Click);
             // 
             // btnTableDown
             // 
@@ -221,7 +221,7 @@ namespace WindyBellows
             this.btnTableDown.TabIndex = 16;
             this.btnTableDown.Text = "Move DOWN";
             this.btnTableDown.UseVisualStyleBackColor = true;
-            this.btnTableDown.Click += new System.EventHandler(this.btnTableDown_Click);
+            this.btnTableDown.Click += new System.EventHandler(this.BtnTableDown_Click);
             // 
             // frmTableEditor
             // 
@@ -246,7 +246,7 @@ namespace WindyBellows
             this.Controls.Add(this.dataGridView1);
             this.Name = "frmTableEditor";
             this.Text = "frmTableEditor";
-            this.Load += new System.EventHandler(this.frmTableEditor_Load);
+            this.Load += new System.EventHandler(this.FrmTableEditor_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

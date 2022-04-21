@@ -1,7 +1,7 @@
 ﻿
 namespace WindyBellows
 {
-    partial class frmCreateNPC
+    partial class CreateNPC
     {
         /// <summary>
         /// Required designer variable.
@@ -255,7 +255,7 @@ namespace WindyBellows
             this.btnCreateNPC.TabIndex = 14;
             this.btnCreateNPC.Text = "Create NPCs";
             this.btnCreateNPC.UseVisualStyleBackColor = true;
-            this.btnCreateNPC.Click += new System.EventHandler(this.btnCreateNPC_Click);
+            this.btnCreateNPC.Click += new System.EventHandler(this.BtnCreateNPC_Click);
             // 
             // btnRandomRace
             // 
@@ -266,7 +266,7 @@ namespace WindyBellows
             this.btnRandomRace.TabIndex = 16;
             this.btnRandomRace.Text = "Randomize Race";
             this.btnRandomRace.UseVisualStyleBackColor = true;
-            this.btnRandomRace.Click += new System.EventHandler(this.btnRandomRace_Click);
+            this.btnRandomRace.Click += new System.EventHandler(this.BtnRandomRace_Click);
             // 
             // btnRandomStats
             // 
@@ -277,7 +277,7 @@ namespace WindyBellows
             this.btnRandomStats.TabIndex = 15;
             this.btnRandomStats.Text = "Randomize Stats";
             this.btnRandomStats.UseVisualStyleBackColor = true;
-            this.btnRandomStats.Click += new System.EventHandler(this.btnRandomStats_Click);
+            this.btnRandomStats.Click += new System.EventHandler(this.BtnRandomStats_Click);
             // 
             // btnToNPCLayout
             // 
@@ -287,7 +287,7 @@ namespace WindyBellows
             this.btnToNPCLayout.TabIndex = 17;
             this.btnToNPCLayout.Text = "Create Player";
             this.btnToNPCLayout.UseVisualStyleBackColor = true;
-            this.btnToNPCLayout.Click += new System.EventHandler(this.btnToNPCLayout_Click);
+            this.btnToNPCLayout.Click += new System.EventHandler(this.BtnToNPCLayout_Click);
             // 
             // label3
             // 
@@ -351,7 +351,7 @@ namespace WindyBellows
             this.btnConfig.TabIndex = 31;
             this.btnConfig.Text = "Configure Tables";
             this.btnConfig.UseVisualStyleBackColor = true;
-            this.btnConfig.Click += new System.EventHandler(this.btnConfig_Click);
+            this.btnConfig.Click += new System.EventHandler(this.BtnConfig_Click);
             // 
             // frmCreateNPC
             // 

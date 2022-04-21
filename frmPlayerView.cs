@@ -22,24 +22,24 @@ namespace WindyBellows
             InitializeComponent();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBox1_SelectedIndexChange(object sender, EventArgs e)
         {
 
         }
 
-        private void frmPlayerView_Load(object sender, EventArgs e)
+        private void FrmPlayerView_Load(object sender, EventArgs e)
         {
-            for (int i = 0; i < frmMain._comp.Players.Count; i++)
+            for (int i = 0; i < FrmMain._comp.Players.Count; i++)
             {
-                toolStripComboBox1.Items.Add(frmMain._comp.Players[i].Name);
+                toolStripComboBox1.Items.Add(FrmMain._comp.Players[i].Name);
             }
-            for (int i = 0; i < frmMain._comp.NPCs.Count; i++)
+            for (int i = 0; i < FrmMain._comp.NPCs.Count; i++)
             {
-                toolStripComboBox2.Items.Add(frmMain._comp.NPCs[i].Name);
+                toolStripComboBox2.Items.Add(FrmMain._comp.NPCs[i].Name);
             }
-            for (int i = 0; i < frmMain._comp.Guilds.Count; i++)
+            for (int i = 0; i < FrmMain._comp.Guilds.Count; i++)
             {
-                toolStripComboBox3.Items.Add(frmMain._comp.Guilds[i].Name);
+                toolStripComboBox3.Items.Add(FrmMain._comp.Guilds[i].Name);
             }
             x = 0;
             y = 28;
@@ -48,7 +48,7 @@ namespace WindyBellows
 
         private void NewUser(Player _player)
         {
-            UCBasicPlayerView ucPlayerView = new UCBasicPlayerView();
+            UCBasicPlayerView ucPlayerView = new();
             Controls.Add(ucPlayerView);
             if (UserCount < 5)
             {
@@ -72,7 +72,7 @@ namespace WindyBellows
         }
         private void NewUser(NPC _NPC)
         {
-            UCBasicPlayerView ucPlayerView = new UCBasicPlayerView();
+            UCBasicPlayerView ucPlayerView = new();
             Controls.Add(ucPlayerView);
             indexController = this.Controls.Count - 1;
             ucPlayerView.Name = "ucPlayerView" + indexController;
@@ -96,15 +96,15 @@ namespace WindyBellows
             Console.WriteLine(this.Controls[indexController].Name.ToString());
             LoadUCdata(_NPC, ucPlayerView);
         }
-        private void addPlayerToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AddPlayerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (toolStripComboBox1.SelectedIndex == -1)
             {
                 return;
             }
-            NewUser(frmMain._comp.Players[toolStripComboBox1.SelectedIndex]);
+            NewUser(FrmMain._comp.Players[toolStripComboBox1.SelectedIndex]);
         }
-        private void LoadUCdata(Player _player, UCBasicPlayerView _UC)
+        private static void LoadUCdata(Player _player, UCBasicPlayerView _UC)
         {
             _UC.lblName.Text = _player.Name.ToString();
             _UC.lblLevel.Text = _player.Level.ToString();
@@ -118,7 +118,7 @@ namespace WindyBellows
             _UC.lblPP.Text = _player.Preception.ToString();
             _UC.lblHP.Text = _player.HP.ToString();
         }
-        private void LoadUCdata(NPC _NPC, UCBasicPlayerView _UC)
+        private static void LoadUCdata(NPC _NPC, UCBasicPlayerView _UC)
         {
             _UC.lblName.Text = _NPC.Name.ToString();
             _UC.lblLevel.Text = _NPC.Level.ToString();
@@ -133,33 +133,33 @@ namespace WindyBellows
             _UC.lblHP.Text = _NPC.HP.ToString();
         }
 
-        private void addNPCToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AddNPCToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (toolStripComboBox2.SelectedIndex == -1)
             {
                 return;
             }
-            NewUser(frmMain._comp.NPCs[toolStripComboBox2.SelectedIndex]);
+            NewUser(FrmMain._comp.NPCs[toolStripComboBox2.SelectedIndex]);
         }
 
-        private void loadGuildToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void LoadGuildToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             if (toolStripComboBox3.SelectedIndex == -1)
             {
                 return;
             }
-            for (int i = 0; i < frmMain._comp.Players.Count; i++)
+            for (int i = 0; i < FrmMain._comp.Players.Count; i++)
             {
-                if (frmMain._comp.Guilds[toolStripComboBox3.SelectedIndex].Players.Contains(frmMain._comp.Players[i].Name))
+                if (FrmMain._comp.Guilds[toolStripComboBox3.SelectedIndex].Players.Contains(FrmMain._comp.Players[i].Name))
                 {
-                    NewUser(frmMain._comp.Players[i]);
+                    NewUser(FrmMain._comp.Players[i]);
                 }
             }
-            for (int i = 0; i < frmMain._comp.NPCs.Count; i++)
+            for (int i = 0; i < FrmMain._comp.NPCs.Count; i++)
             {
-                if (frmMain._comp.Guilds[toolStripComboBox3.SelectedIndex].NPCs.Contains(frmMain._comp.NPCs[i].Name))
+                if (FrmMain._comp.Guilds[toolStripComboBox3.SelectedIndex].NPCs.Contains(FrmMain._comp.NPCs[i].Name))
                 {
-                    NewUser(frmMain._comp.NPCs[i]);
+                    NewUser(FrmMain._comp.NPCs[i]);
                 }
             }
 

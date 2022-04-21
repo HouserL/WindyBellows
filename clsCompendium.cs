@@ -20,7 +20,6 @@ namespace WindyBellows
         [System.Xml.Serialization.XmlElementAttribute("Guild")]
         public List<Guild> Guilds { get; set; }
 
-      
     }
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -34,9 +33,9 @@ namespace WindyBellows
         public byte AC { get; set; }
         public byte Old_AC { get; set; }
         public int Old_Preception { get; set; }
-        public List<Prof> Prof { get; set; }
+        public List<Prof> Prof { get; set; } = new();
         [System.Xml.Serialization.XmlElementAttribute("Trait")]
-        public List<BaseItem> Trait { get; set; }
+        public List<BaseItem> Trait { get; set; } = new();
         public int ProfBonus
         {
             get
@@ -48,11 +47,31 @@ namespace WindyBellows
         {
             get
             {
-                if (Prof.Contains(WindyBellows.Prof.Perception))
+                if (Prof == null)
                 {
-                    return (Stats.WIS / 2 - 5 + 10 + ProfBonus);
+                    Prof = new List<Prof>();
                 }
-                return (Stats.WIS / 2 - 5 + 10);
+                return Prof.Contains(WindyBellows.Prof.Perception) ? (Stats.WIS / 2) - 5 + 10 + ProfBonus : (Stats.WIS / 2) - 5 + 10;
+            }
+
+        }
+       
+       // public int Athletics;
+        //public int AnimalHandling;
+        //blah blah
+    }
+    public class Skills
+    {
+        private readonly Player _player;
+        public Skills(Player player)
+        {
+            _player = player;
+        }
+        public int Athletics
+        {
+            get
+            {
+                return _player.Stats.STR;
             }
         }
     }
@@ -163,34 +182,43 @@ namespace WindyBellows
         public byte HitDieValue { get; set; }
         public string OldSkill { get; set; }
         public string OldSave { get; set; }
-        public BaseStats Stats { get; set; }
-        public List<Save> Save { get; set; }
-        public List<Prof> Skill { get; set; }
+        public BaseStats Stats { get; set; } = new();
+        public List<Save> Save { get; set; } = new();
+        public List<Prof> Profs { get; set; } = new();
         public string CR { get; set; }
-        public string slots { get; set; }
-        public byte passive { get; set; }
-        public string senses { get; set; }
-        public string condition { get; set; }
-        public string immuneold { get; set; }
-        public string resist { get; set; }
-        public string enivroment { get; set; }
-        public string description { get; set; }
-        public string languages { get; set; }
-        public string alignment { get; set; }
-        [System.Xml.Serialization.XmlElementAttribute("Trait")]
-        public List<BaseItem> Trait { get; set; }
-        [System.Xml.Serialization.XmlElementAttribute("Action")]
-        public List<BaseItem> Action { get; set; }
-        [System.Xml.Serialization.XmlElementAttribute("Reaction")]
-        public List<BaseItem> Reaction { get; set; }
-        [System.Xml.Serialization.XmlElementAttribute("Legendary")]
-        public List<BaseItem> Legendary { get; set; }
+        public string Slots { get; set; }
+        public byte ProfBonus { get; set; }
+        public int PassivePerception()
+        {
+            if (Profs == null)
+            {
+                Profs = new List<Prof>();
+            }
+            if (Profs.Contains(Prof.Perception))
+            {
+                return (Stats.WIS / 2 - 5 + 10 + ProfBonus);
+            }
+            return (Stats.WIS / 2 - 5 + 10);
 
+        }
+        public string Senses { get; set; }
+        public string Condition { get; set; }
+        public string Immuneold { get; set; }
+        public string Resist { get; set; }
+        public string Enviroment { get; set; }
+        public string Description { get; set; }
+        public string Languages { get; set; }
+        [System.Xml.Serialization.XmlElementAttribute("Trait")]
+        public List<BaseItem> Trait { get; set; } = new();
+        [System.Xml.Serialization.XmlElementAttribute("Action")]
+        public List<BaseItem> Action { get; set; } = new();
+        [System.Xml.Serialization.XmlElementAttribute("Reaction")]
+        public List<BaseItem> Reaction { get; set; } = new();
+        [System.Xml.Serialization.XmlElementAttribute("Legendary")]
+        public List<BaseItem> Legendary { get; set; } = new();
         public int AverageHP()
         {
-            int i = 0;
-            i = (HitDieValue * (HitDie + 1) / 2) + (HitDie * (Stats.CON / 2 - 5));
-            return i;
+           return (HitDieValue * (HitDie + 1) / 2 + HitDie * (Stats.CON / 2 - 5));
         }
         public int RandomHP()
         {
@@ -200,6 +228,16 @@ namespace WindyBellows
                 Output += Table.RandomNumberSeeded(HitDieValue) + (Stats.CON / 2 - 5);
             }
             return Output;
+        }
+        public string HPFormula()
+        {
+            switch (Stats.CON)
+            {
+                case < 10: return (HitDie + "d" + HitDieValue + "-" + Stats.CON).ToString();
+                case 10 or 11: return (HitDie + "d" + HitDieValue).ToString();
+                case > 11: return (HitDie + "d" + HitDieValue + "+" + Stats.CON).ToString();
+                default: 
+            }
         }
     }
 
@@ -225,26 +263,36 @@ namespace WindyBellows
         // that its a new seed each process so not repeating results.
         public static int RandomNumberSeeded(int DieValue)
         {
-            System.Threading.Thread.Sleep(1);
-            Random random = new Random((int)DateTime.Now.Ticks & 0x0000FFFF);
+            Wait();
+            //System.Threading.Thread.Sleep(1);
+            Random random = new((int)DateTime.Now.Ticks & 0x0000FFFF);
             return random.Next(1, DieValue + 1);
+        }
+        private static void Wait()
+        {
+            int cTime = Convert.ToInt32(DateTime.Now.Ticks & 0x0000FFFF);
+            do
+            {
+                System.Diagnostics.Debug.WriteLine(Convert.ToString(DateTime.Now.Ticks & 0x0000FFFF));
+                System.Diagnostics.Debug.WriteLine(cTime.ToString());
+            } while (cTime == Convert.ToInt32(DateTime.Now.Ticks & 0x0000FFFF));
         }
         public static int RandomNumberSeeded(Table _table)
         {
-            System.Threading.Thread.Sleep(1);
-            Random random = new Random((int)DateTime.Now.Ticks & 0x0000FFFF);
+            Wait();
+            Random random = new((int)DateTime.Now.Ticks & 0x0000FFFF);
             return random.Next(Table.TableTotalValue(_table));
         }
         public static string RunTable(List<Table> _TableList, Table _Table)
         {
             int r = RandomNumberSeeded(_Table);
-            int compare = new int();
+            int compare = new();
             for (int i = 0; i < _Table.TableItems.Count; i++)
             {
                 compare += _Table.TableItems[i].Value;
                 if (r < compare)
                 {
-                    if (_Table.TableItems[i].isTable == true)
+                    if (_Table.TableItems[i].IsTable == true)
                     {
                         string TableName = _Table.TableItems[i].Name;
                         for (int j = 0; j < _TableList.Count; j++)
@@ -272,7 +320,7 @@ namespace WindyBellows
     {
         public string Name { get; set; }
         public int Value { get; set; }
-        public bool isTable { get; set; }
+        public bool IsTable { get; set; }
     }
     public partial class Guild
     {

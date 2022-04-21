@@ -1,7 +1,7 @@
 ﻿
 namespace WindyBellows
 {
-    partial class frmMain
+    partial class FrmMain
     {
         /// <summary>
         /// Required designer variable.
@@ -51,7 +51,7 @@ namespace WindyBellows
             this.btnCreateNPC.TabIndex = 0;
             this.btnCreateNPC.Text = "NPCs Creator";
             this.btnCreateNPC.UseVisualStyleBackColor = true;
-            this.btnCreateNPC.Click += new System.EventHandler(this.btnCreateNPC_Click);
+            this.btnCreateNPC.Click += new System.EventHandler(this.BtnCreateNPC_Click);
             // 
             // menuStrip1
             // 
@@ -77,7 +77,7 @@ namespace WindyBellows
             this.savePlayerBaseToolStripMenuItem.Name = "savePlayerBaseToolStripMenuItem";
             this.savePlayerBaseToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.savePlayerBaseToolStripMenuItem.Text = "Save All Data";
-            this.savePlayerBaseToolStripMenuItem.Click += new System.EventHandler(this.savePlayerBaseToolStripMenuItem_Click);
+            this.savePlayerBaseToolStripMenuItem.Click += new System.EventHandler(this.SavePlayerBaseToolStripMenuItem_Click);
             // 
             // button1
             // 
@@ -87,7 +87,7 @@ namespace WindyBellows
             this.button1.TabIndex = 2;
             this.button1.Text = "Start Conversion";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // btnPlayerView
             // 
@@ -97,7 +97,7 @@ namespace WindyBellows
             this.btnPlayerView.TabIndex = 3;
             this.btnPlayerView.Text = "Party Viewer";
             this.btnPlayerView.UseVisualStyleBackColor = true;
-            this.btnPlayerView.Click += new System.EventHandler(this.btnPlayerView_Click);
+            this.btnPlayerView.Click += new System.EventHandler(this.BtnPlayerView_Click);
             // 
             // btnTableEditor
             // 
@@ -107,7 +107,7 @@ namespace WindyBellows
             this.btnTableEditor.TabIndex = 4;
             this.btnTableEditor.Text = "Table Editor";
             this.btnTableEditor.UseVisualStyleBackColor = true;
-            this.btnTableEditor.Click += new System.EventHandler(this.btnTableEditor_Click);
+            this.btnTableEditor.Click += new System.EventHandler(this.BtnTableEditor_Click);
             // 
             // textBox1
             // 
@@ -124,7 +124,7 @@ namespace WindyBellows
             this.button2.TabIndex = 6;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // comboBox1
             // 
@@ -142,7 +142,7 @@ namespace WindyBellows
             this.btnMonster.TabIndex = 8;
             this.btnMonster.Text = "Load Monster";
             this.btnMonster.UseVisualStyleBackColor = true;
-            this.btnMonster.Click += new System.EventHandler(this.btnMonster_Click);
+            this.btnMonster.Click += new System.EventHandler(this.BtnMonster_Click);
             // 
             // frmMain
             // 
@@ -162,7 +162,7 @@ namespace WindyBellows
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMain";
             this.Text = "Compendium";
-            this.Load += new System.EventHandler(this.frmPlayerView_Load);
+            this.Load += new System.EventHandler(this.FrmPlayerView_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

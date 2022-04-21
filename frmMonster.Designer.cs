@@ -52,8 +52,8 @@ namespace WindyBellows
             this.rtbName.TabIndex = 2;
             this.rtbName.Text = "Hello";
             this.rtbName.WordWrap = false;
-            this.rtbName.ContentsResized += new System.Windows.Forms.ContentsResizedEventHandler(this.rtbReSize);
-            this.rtbName.GotFocus += new System.EventHandler(this.rtbGotFocus);
+            this.rtbName.ContentsResized += new System.Windows.Forms.ContentsResizedEventHandler(this.RtbReSize);
+            this.rtbName.GotFocus += new System.EventHandler(this.RtbGotFocus);
             // 
             // rtbAC
             // 
@@ -68,7 +68,7 @@ namespace WindyBellows
             this.rtbAC.TabIndex = 4;
             this.rtbAC.Text = "Hello";
             this.rtbAC.WordWrap = false;
-            this.rtbAC.ContentsResized += new System.Windows.Forms.ContentsResizedEventHandler(this.rtbReSize);
+            this.rtbAC.ContentsResized += new System.Windows.Forms.ContentsResizedEventHandler(this.RtbReSize);
             // 
             // label2
             // 
@@ -93,7 +93,7 @@ namespace WindyBellows
             this.rtbSize.TabIndex = 5;
             this.rtbSize.Text = "Hello";
             this.rtbSize.WordWrap = false;
-            this.rtbSize.ContentsResized += new System.Windows.Forms.ContentsResizedEventHandler(this.rtbReSize);
+            this.rtbSize.ContentsResized += new System.Windows.Forms.ContentsResizedEventHandler(this.RtbReSize);
             // 
             // rtbSpeed
             // 
@@ -108,7 +108,7 @@ namespace WindyBellows
             this.rtbSpeed.TabIndex = 7;
             this.rtbSpeed.Text = "Hello";
             this.rtbSpeed.WordWrap = false;
-            this.rtbSpeed.ContentsResized += new System.Windows.Forms.ContentsResizedEventHandler(this.rtbReSize);
+            this.rtbSpeed.ContentsResized += new System.Windows.Forms.ContentsResizedEventHandler(this.RtbReSize);
             // 
             // label1
             // 
@@ -133,7 +133,7 @@ namespace WindyBellows
             this.rtbHP.TabIndex = 9;
             this.rtbHP.Text = "Hello";
             this.rtbHP.WordWrap = false;
-            this.rtbHP.ContentsResized += new System.Windows.Forms.ContentsResizedEventHandler(this.rtbReSize);
+            this.rtbHP.ContentsResized += new System.Windows.Forms.ContentsResizedEventHandler(this.RtbReSize);
             // 
             // label3
             // 
@@ -160,7 +160,7 @@ namespace WindyBellows
             this.Controls.Add(this.rtbName);
             this.Name = "frmMonster";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.frmMonster_Load);
+            this.Load += new System.EventHandler(this.FrmMonster_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

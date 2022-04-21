@@ -11,45 +11,43 @@ using System.Runtime.InteropServices;
 
 namespace WindyBellows
 {
- 
-
     public partial class frmMonster : Form
     {
-        public Monster _monster { get; set; }
+        public Monster Monster { get; set; }
         public frmMonster()
         {
             InitializeComponent();
         }
 
-        private void frmMonster_Load(object sender, EventArgs e)
+        private void FrmMonster_Load(object sender, EventArgs e)
         {
-            if (_monster != null) { LoadMonster(); }
+            if (Monster != null) { LoadMonster(); }
             else { NewMonster(); }
         }
         private void LoadMonster()
         {
             //txtName
-            rtbName.Text = _monster.Name;
-            rtbSize.Text = _monster.Size + ", " + _monster.Type + ' ' + _monster.alignment;
-            rtbAC.Text = _monster.AC;
-            rtbHP.Text = _monster.AverageHP().ToString() + " (" + _monster.HitDie.ToString() + "d"
-                + _monster.HitDieValue.ToString();
-            switch (Convert.ToInt32(_monster.Stats))
-            {
-                case < 10:  rtbHP.Text += ((_monster.Stats.CON / 2 - 5)* -1).ToString(); break; 
-                case 10 or 11:  break; 
-                case > 11: rtbHP.Text += (_monster.Stats.CON / 2 - 5).ToString(); break;
-                default:
-            }
+            rtbName.Text = Monster.Name;
+            rtbSize.Text = Monster.Size + ", " + Monster.Type + ' ' + Monster.Alignment;
+            rtbAC.Text = Monster.AC;
+            rtbHP.Text = Monster.AverageHP().ToString() + " (" + Monster.HitDie.ToString() + "d"
+                + Monster.HitDieValue.ToString();
+            //switch (Convert.ToInt32(Monster.Stats))
+            //{
+            //    case < 10: rtbHP.Text += ((Monster.Stats.CON / 2 - 5) * -1).ToString(); break;
+            //    case 10 or 11: break;
+            //    case > 11: rtbHP.Text += ((Monster.Stats.CON / 2) - 5).ToString(); break;
+            //    default:
+            //}
         }
         private void NewMonster()
         {
             rtbName.ReadOnly = false;
         }
 
-        private void txtName_Click(object sender, EventArgs e)
+        private void TxtName_Click(object sender, EventArgs e)
         {
-            if(rtbName.ReadOnly != false)
+            if (rtbName.ReadOnly != false)
             {
                 //txtName.
             }
@@ -57,7 +55,7 @@ namespace WindyBellows
 
         [DllImport("user32.dll")]
         static extern bool HideCaret(IntPtr hwnd);
-        private void rtbReSize(object sender, ContentsResizedEventArgs e)
+        private void RtbReSize(object sender, ContentsResizedEventArgs e)
         {
 
             const int margin = 5;
@@ -67,11 +65,10 @@ namespace WindyBellows
             e.NewRectangle.Height + margin);
         }
 
-        private void rtbGotFocus(object sender, EventArgs e)
+        private void RtbGotFocus(object sender, EventArgs e)
         {
-            
             RichTextBox rch = sender as RichTextBox;
-            if(rch.ReadOnly != false)
+            if (rch.ReadOnly != false)
             {
                 HideCaret(rch.Handle);
             }
