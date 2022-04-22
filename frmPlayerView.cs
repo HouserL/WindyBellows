@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindyBellows.Models;
 
 namespace WindyBellows
 {
@@ -108,26 +109,26 @@ namespace WindyBellows
         {
             _UC.lblName.Text = _player.Name.ToString();
             _UC.lblLevel.Text = _player.Level.ToString();
-            _UC.lblSTR.Text = _player.Stats.STR.ToString() + " (" + (_player.Stats.STR / 2 - 5).ToString() + ")";
-            _UC.lblDEX.Text = _player.Stats.DEX.ToString() + " (" + (_player.Stats.DEX / 2 - 5).ToString() + ")";
-            _UC.lblCON.Text = _player.Stats.CON.ToString() + " (" + (_player.Stats.CON / 2 - 5).ToString() + ")";
-            _UC.blbWIS.Text = _player.Stats.WIS.ToString() + " (" + (_player.Stats.WIS / 2 - 5).ToString() + ")";
-            _UC.lblINT.Text = _player.Stats.INT.ToString() + " (" + (_player.Stats.INT / 2 - 5).ToString() + ")";
-            _UC.lblCHR.Text = _player.Stats.CHR.ToString() + " (" + (_player.Stats.CHR / 2 - 5).ToString() + ")";
+            _UC.lblSTR.Text = _player.STR.ToString() + " (" + (_player.STR / 2 - 5).ToString() + ")";
+            _UC.lblDEX.Text = _player.DEX.ToString() + " (" + (_player.DEX / 2 - 5).ToString() + ")";
+            _UC.lblCON.Text = _player.CON.ToString() + " (" + (_player.CON / 2 - 5).ToString() + ")";
+            _UC.blbWIS.Text = _player.WIS.ToString() + " (" + (_player.WIS / 2 - 5).ToString() + ")";
+            _UC.lblINT.Text = _player.INT.ToString() + " (" + (_player.INT / 2 - 5).ToString() + ")";
+            _UC.lblCHR.Text = _player.CHR.ToString() + " (" + (_player.CHR / 2 - 5).ToString() + ")";
             _UC.lblAC.Text = _player.Old_AC.ToString();
-            _UC.lblPP.Text = _player.Preception.ToString();
+            _UC.lblPP.Text = ""; // removed passive so fix this
             _UC.lblHP.Text = _player.HP.ToString();
         }
         private static void LoadUCdata(NPC _NPC, UCBasicPlayerView _UC)
         {
             _UC.lblName.Text = _NPC.Name.ToString();
             _UC.lblLevel.Text = _NPC.Level.ToString();
-            _UC.lblSTR.Text = _NPC.Stats.STR.ToString() + " (" + (_NPC.Stats.STR / 2 - 5).ToString() + ")";
-            _UC.lblDEX.Text = _NPC.Stats.DEX.ToString() + " (" + (_NPC.Stats.DEX / 2 - 5).ToString() + ")";
-            _UC.lblCON.Text = _NPC.Stats.CON.ToString() + " (" + (_NPC.Stats.CON / 2 - 5).ToString() + ")";
-            _UC.blbWIS.Text = _NPC.Stats.WIS.ToString() + " (" + (_NPC.Stats.WIS / 2 - 5).ToString() + ")";
-            _UC.lblINT.Text = _NPC.Stats.INT.ToString() + " (" + (_NPC.Stats.INT / 2 - 5).ToString() + ")";
-            _UC.lblCHR.Text = _NPC.Stats.CHR.ToString() + " (" + (_NPC.Stats.CHR / 2 - 5).ToString() + ")";
+            _UC.lblSTR.Text = _NPC.STR.ToString() + " (" + (_NPC.STR / 2 - 5).ToString() + ")";
+            _UC.lblDEX.Text = _NPC.DEX.ToString() + " (" + (_NPC.DEX / 2 - 5).ToString() + ")";
+            _UC.lblCON.Text = _NPC.CON.ToString() + " (" + (_NPC.CON / 2 - 5).ToString() + ")";
+            _UC.blbWIS.Text = _NPC.WIS.ToString() + " (" + (_NPC.WIS / 2 - 5).ToString() + ")";
+            _UC.lblINT.Text = _NPC.INT.ToString() + " (" + (_NPC.INT / 2 - 5).ToString() + ")";
+            _UC.lblCHR.Text = _NPC.CHR.ToString() + " (" + (_NPC.CHR / 2 - 5).ToString() + ")";
             _UC.lblAC.Text = _NPC.Old_AC.ToString();
             _UC.lblPP.Text = _NPC.Old_Preception.ToString();
             _UC.lblHP.Text = _NPC.HP.ToString();

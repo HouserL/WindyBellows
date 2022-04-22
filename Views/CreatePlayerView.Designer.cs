@@ -1,14 +1,13 @@
-﻿
-namespace WindyBellows
+﻿namespace WindyBellows.Views
 {
-    partial class CreateNPC
+    partial class CreatePlayerView
     {
-        /// <summary>
+        /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
+        /// <summary> 
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -21,7 +20,7 @@ namespace WindyBellows
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Component Designer generated code
 
         /// <summary>
         /// Required method for Designer support - do not modify
@@ -255,7 +254,6 @@ namespace WindyBellows
             this.btnCreateNPC.TabIndex = 14;
             this.btnCreateNPC.Text = "Create NPCs";
             this.btnCreateNPC.UseVisualStyleBackColor = true;
-            this.btnCreateNPC.Click += new System.EventHandler(this.BtnCreateNPC_Click);
             // 
             // btnRandomRace
             // 
@@ -432,3 +430,4 @@ namespace WindyBellows
         private System.Windows.Forms.Button btnConfig;
     }
 }
+

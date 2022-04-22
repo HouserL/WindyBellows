@@ -7,74 +7,57 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindyBellows.Models;
 
-namespace WindyBellows
+namespace WindyBellows.Views
 {
-
-
-    public partial class CreateNPC : Form
+    public partial class CreatePlayerView : UserControl
     {
-        public int stat;
-        public CreateNPC()
+        public CreatePlayerView()
         {
             InitializeComponent();
         }
-
-        private void BtnCreateNPC_Click(object sender, EventArgs e)
+        public List<Player> NewPlayer(List<Player> _players)
         {
+            Player _Player = new Player();
             try
             {
-                // Add new NPCs to list with inserted values need to make sure if text boxs void
-                // that it throws error.
-                NPC _NPC = new();
-                BaseStats _stats = new()
-                {
-                    STR = Convert.ToByte(txtSTR.Text.ToString()),
-                    CON = Convert.ToByte(txtCON.Text.ToString()),
-                    DEX = Convert.ToByte(txtDEX.Text.ToString()),
-                    WIS = Convert.ToByte(txtWIS.Text.ToString()),
-                    INT = Convert.ToByte(txtINT.Text.ToString()),
-                    CHR = Convert.ToByte(txtCHR.Text.ToString()),
-                };
+                // Add new player to list with inserted values need to make sure if text boxs void
+                // that it throws error temp right now for creating basic stats for a player for client.
+               
+                _Player.STR = Convert.ToByte(txtSTR.Text.ToString());
+                _Player.CON = Convert.ToByte(txtCON.Text.ToString());
+                _Player.DEX = Convert.ToByte(txtDEX.Text.ToString());
+                _Player.WIS = Convert.ToByte(txtWIS.Text.ToString());
+                _Player.INT = Convert.ToByte(txtINT.Text.ToString());
+                _Player.CHR = Convert.ToByte(txtCHR.Text.ToString());
+                _Player.Old_AC = Convert.ToByte(txtAC.Text.ToString());
+                _Player.Level = Convert.ToByte(txtLevel.Text.ToString());
+                _Player.Old_Preception = Convert.ToInt32(txtPassive.Text.ToString());
+                _Player.Name = txtName.Text.ToString();
+                _Player.HP = Convert.ToByte(txtHP.Text.ToString());
 
-                _NPC.Old_AC = Convert.ToInt32(txtAC.Text.ToString());
-                _NPC.Level = Convert.ToInt32(txtLevel.Text.ToString());
-                _NPC.Old_Preception = Convert.ToInt32(txtPassive.Text.ToString());
-                _NPC.Name = txtName.Text.ToString();
-                _NPC.Occupation = txtOccupation.Text.ToString();
-                _NPC.Race = txtRace.Text.ToString();
-                _NPC.HP = Convert.ToInt32(txtHP.Text.ToString());
-                _NPC.Stats = _stats;
-
-                for (int i = 0; i < Main._comp.NPCs.Count; i++)
+                for (int i = 0; i < Main._comp.Players.Count; i++)
                 {
                     //see if NPCs already exists and remove or update it.
-                    if (_NPC.Name.Equals(Main._comp.NPCs[i].Name))
+                    if (_Player.Name.Equals(_players[i].Name))
                     {
-                        DialogResult dialogResult = MessageBox.Show("NPCs with this Name already exist would you like to " +
-                            "overwrite current NPCs?", "NPCs Creator", MessageBoxButtons.YesNo);
-                        if (dialogResult == DialogResult.Yes)
-                        {
-                            Main._comp.NPCs.Remove(Main._comp.NPCs[i]);
-
-                        }
-                        else if (dialogResult == DialogResult.No)
-                        {
-                            return;
-                        }
+                        DialogResult dialogResult = MessageBox.Show("Player with this Name already exist would you like to " +
+                            "overwrite current Player?", "NPCs Creator", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.No) return null;
+                        Main.RemovePlayer(i);
                     }
                 }
-
-                Main._comp.NPCs.Add(_NPC);
-                Main._comp.NPCs.Sort((x, y) => string.Compare(x.Name, y.Name));
-                Main.SaveNPCBase();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                return;
+                return null;
             }
+            _players.Add (_Player);
+            return _players;
         }
+
         private void BtnRandomStats_Click(object sender, EventArgs e)
         {
 
@@ -92,7 +75,7 @@ namespace WindyBellows
         }
 
         static int RandomStatRoll()
-        {   
+        {
             int d1 = Table.RandomNumberSeeded(6);
             int d2 = Table.RandomNumberSeeded(6);
             int d3 = Table.RandomNumberSeeded(6);
@@ -115,16 +98,13 @@ namespace WindyBellows
                 // Add new player to list with inserted values need to make sure if text boxs void
                 // that it throws error temp right now for creating basic stats for a player for client.
                 Player _Player = new();
-                BaseStats _stats = new()
-                {
-                    STR = Convert.ToByte(txtSTR.Text.ToString()),
-                    CON = Convert.ToByte(txtCON.Text.ToString()),
-                    DEX = Convert.ToByte(txtDEX.Text.ToString()),
-                    WIS = Convert.ToByte(txtWIS.Text.ToString()),
-                    INT = Convert.ToByte(txtINT.Text.ToString()),
-                    CHR = Convert.ToByte(txtCHR.Text.ToString()),
-                };
-
+               
+                _Player.STR = Convert.ToByte(txtSTR.Text.ToString());
+                _Player.CON = Convert.ToByte(txtCON.Text.ToString());
+                _Player.DEX = Convert.ToByte(txtDEX.Text.ToString());
+                _Player.WIS = Convert.ToByte(txtWIS.Text.ToString());
+                _Player.INT = Convert.ToByte(txtINT.Text.ToString());
+                _Player.CHR = Convert.ToByte(txtCHR.Text.ToString());
                 _Player.Old_AC = Convert.ToByte(txtAC.Text.ToString());
                 _Player.Level = Convert.ToByte(txtLevel.Text.ToString());
                 _Player.Old_Preception = Convert.ToInt32(txtPassive.Text.ToString());
@@ -132,7 +112,6 @@ namespace WindyBellows
                 //_Player.Occupation = txtOccupation.Text.ToString();
                 //_Player.Race = txtRace.Text.ToString();
                 _Player.HP = Convert.ToByte(txtHP.Text.ToString());
-                _Player.Stats = _stats;
 
                 for (int i = 0; i < Main._comp.Players.Count; i++)
                 {
@@ -155,7 +134,7 @@ namespace WindyBellows
 
                 Main._comp.Players.Add(_Player);
                 Main._comp.Players.Sort((x, y) => string.Compare(x.Name, y.Name));
-                Main.SavePlayerBase();
+                Main.SaveCompendium();
             }
             catch (Exception ex)
             {
@@ -183,7 +162,7 @@ namespace WindyBellows
 
             ComboBox comboBox = new();
             ComboBox combobox = comboBox;
-            for (int i = 0; i < Main._comp.Tables.Count ; i++)
+            for (int i = 0; i < Main._comp.Tables.Count; i++)
             {
                 combobox.Items.Add(Main._comp.Tables[i].Name);
             }
@@ -191,7 +170,7 @@ namespace WindyBellows
             combobox.Location = new System.Drawing.Point(5, 5);
             combobox.SelectedIndex = input;
             inputBox.Controls.Add(combobox);
-            
+
 
 
             //System.Windows.Forms.TextBox textBox = new TextBox();
@@ -224,4 +203,6 @@ namespace WindyBellows
             return result;
         }
     }
+
 }
+
