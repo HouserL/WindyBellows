@@ -34,12 +34,14 @@ namespace WindyBellows
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.savePlayerBaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
-            this.btnPlayerView = new System.Windows.Forms.Button();
+            this.btnPartyView = new System.Windows.Forms.Button();
             this.btnTableEditor = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btnMonster = new System.Windows.Forms.Button();
+            this.BtnPlayerView = new System.Windows.Forms.Button();
+            this.btnSpellView = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,7 +50,7 @@ namespace WindyBellows
             this.btnCreateNPC.Location = new System.Drawing.Point(26, 39);
             this.btnCreateNPC.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCreateNPC.Name = "btnCreateNPC";
-            this.btnCreateNPC.Size = new System.Drawing.Size(83, 74);
+            this.btnCreateNPC.Size = new System.Drawing.Size(83, 52);
             this.btnCreateNPC.TabIndex = 0;
             this.btnCreateNPC.Text = "NPCs Creator";
             this.btnCreateNPC.UseVisualStyleBackColor = true;
@@ -85,29 +87,29 @@ namespace WindyBellows
             this.button1.Location = new System.Drawing.Point(26, 453);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(91, 74);
+            this.button1.Size = new System.Drawing.Size(91, 50);
             this.button1.TabIndex = 2;
             this.button1.Text = "Start Conversion";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
-            // btnPlayerView
+            // btnPartyView
             // 
-            this.btnPlayerView.Location = new System.Drawing.Point(26, 289);
-            this.btnPlayerView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnPlayerView.Name = "btnPlayerView";
-            this.btnPlayerView.Size = new System.Drawing.Size(83, 74);
-            this.btnPlayerView.TabIndex = 3;
-            this.btnPlayerView.Text = "Party Viewer";
-            this.btnPlayerView.UseVisualStyleBackColor = true;
-            this.btnPlayerView.Click += new System.EventHandler(this.BtnPlayerView_Click);
+            this.btnPartyView.Location = new System.Drawing.Point(26, 211);
+            this.btnPartyView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnPartyView.Name = "btnPartyView";
+            this.btnPartyView.Size = new System.Drawing.Size(83, 48);
+            this.btnPartyView.TabIndex = 3;
+            this.btnPartyView.Text = "Party Viewer";
+            this.btnPartyView.UseVisualStyleBackColor = true;
+            this.btnPartyView.Click += new System.EventHandler(this.BtnPartyView_Click);
             // 
             // btnTableEditor
             // 
-            this.btnTableEditor.Location = new System.Drawing.Point(26, 121);
+            this.btnTableEditor.Location = new System.Drawing.Point(26, 99);
             this.btnTableEditor.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnTableEditor.Name = "btnTableEditor";
-            this.btnTableEditor.Size = new System.Drawing.Size(83, 74);
+            this.btnTableEditor.Size = new System.Drawing.Size(83, 48);
             this.btnTableEditor.TabIndex = 4;
             this.btnTableEditor.Text = "Table Editor";
             this.btnTableEditor.UseVisualStyleBackColor = true;
@@ -123,10 +125,10 @@ namespace WindyBellows
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(26, 371);
+            this.button2.Location = new System.Drawing.Point(23, 267);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(91, 74);
+            this.button2.Size = new System.Drawing.Size(91, 52);
             this.button2.TabIndex = 6;
             this.button2.Text = "Save Current Data";
             this.button2.UseVisualStyleBackColor = true;
@@ -143,26 +145,48 @@ namespace WindyBellows
             // 
             // btnMonster
             // 
-            this.btnMonster.Location = new System.Drawing.Point(26, 207);
+            this.btnMonster.Location = new System.Drawing.Point(26, 155);
             this.btnMonster.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnMonster.Name = "btnMonster";
-            this.btnMonster.Size = new System.Drawing.Size(83, 74);
+            this.btnMonster.Size = new System.Drawing.Size(83, 48);
             this.btnMonster.TabIndex = 8;
             this.btnMonster.Text = "Load Monster";
             this.btnMonster.UseVisualStyleBackColor = true;
             this.btnMonster.Click += new System.EventHandler(this.BtnMonster_Click);
+            // 
+            // BtnPlayerView
+            // 
+            this.BtnPlayerView.Location = new System.Drawing.Point(26, 370);
+            this.BtnPlayerView.Name = "BtnPlayerView";
+            this.BtnPlayerView.Size = new System.Drawing.Size(88, 29);
+            this.BtnPlayerView.TabIndex = 9;
+            this.BtnPlayerView.Text = "PlayerView";
+            this.BtnPlayerView.UseVisualStyleBackColor = true;
+            this.BtnPlayerView.Click += new System.EventHandler(this.BtnPlayerView_Click);
+            // 
+            // btnSpellView
+            // 
+            this.btnSpellView.Location = new System.Drawing.Point(26, 326);
+            this.btnSpellView.Name = "btnSpellView";
+            this.btnSpellView.Size = new System.Drawing.Size(88, 29);
+            this.btnSpellView.TabIndex = 10;
+            this.btnSpellView.Text = "SpellView";
+            this.btnSpellView.UseVisualStyleBackColor = true;
+            this.btnSpellView.Click += new System.EventHandler(this.btnSpellView_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(390, 639);
+            this.Controls.Add(this.btnSpellView);
+            this.Controls.Add(this.BtnPlayerView);
             this.Controls.Add(this.btnMonster);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btnTableEditor);
-            this.Controls.Add(this.btnPlayerView);
+            this.Controls.Add(this.btnPartyView);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnCreateNPC);
             this.Controls.Add(this.menuStrip1);
@@ -186,12 +210,14 @@ namespace WindyBellows
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem savePlayerBaseToolStripMenuItem;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button btnPlayerView;
+        private System.Windows.Forms.Button btnPartyView;
         private System.Windows.Forms.Button btnTableEditor;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button btnMonster;
+        private System.Windows.Forms.Button BtnPlayerView;
+        private System.Windows.Forms.Button btnSpellView;
     }
 }
 

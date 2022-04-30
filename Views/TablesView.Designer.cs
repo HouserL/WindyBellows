@@ -188,7 +188,6 @@
             this.RichTextBoxResults.Size = new System.Drawing.Size(324, 190);
             this.RichTextBoxResults.TabIndex = 13;
             this.RichTextBoxResults.Text = "";
-            this.RichTextBoxResults.ContentsResized += new System.Windows.Forms.ContentsResizedEventHandler(this.RichTextBoxResults_ContentsResized);
             // 
             // TextBoxTestNumber
             // 
@@ -231,7 +230,7 @@
             this.Controls.Add(this.ListBoxTables);
             this.Controls.Add(this.DataGridView1);
             this.Name = "TablesView";
-            this.Size = new System.Drawing.Size(796, 673);
+            this.Size = new System.Drawing.Size(802, 673);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -38,7 +38,6 @@ public partial class TablesView : UserControl
         }
         catch (Exception)
         {
-
             //throw;
         }
 
@@ -67,16 +66,6 @@ public partial class TablesView : UserControl
     {
         if (EditName.Checked) TextBoxTableName.ReadOnly = false; 
         else TextBoxTableName.ReadOnly = true;
-    }
-    private void RichTextBoxResults_ContentsResized(object sender, ContentsResizedEventArgs e)
-    {
-        // use this to resize richtext boxs with word wrap to just increase length
-        const int margin = 5;
-        RichTextBox rch = sender as RichTextBox;
-        rch.ClientSize = new Size(
-          e.NewRectangle.Width + margin,
-        e.NewRectangle.Height + margin);
-
     }
 
     private void AddNewTable_Click(object sender, EventArgs e)

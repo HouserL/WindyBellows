@@ -26,6 +26,9 @@ public class Player : SerializableObjectBase
     public List<Prof> Prof { get; set; } = new();
     [System.Xml.Serialization.XmlElementAttribute("Trait")]
     public List<BaseItem> Trait { get; set; } = new();
+    [System.Xml.Serialization.XmlElementAttribute("Spells")]
+    public List<Spell> AllSpells { get; set; } = new();
+    [System.Xml.Serialization.XmlElementAttribute("PreppedSpells")]
+    public List<Spell> PreppedSpells { get; set; } = new();
 
 }
-
